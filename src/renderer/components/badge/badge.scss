@@ -8,8 +8,15 @@
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-user-select: all;
 
   &.small {
     font-size: $font-size-small;
+  }
+
+  &.expanded {
+    overflow: unset;
+    text-overflow: unset;
+    white-space: unset;
   }
 }

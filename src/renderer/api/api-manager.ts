@@ -23,6 +23,7 @@ export class ApiManager {
       return this.apis.get(pathOrCallback) || this.apis.get(KubeApi.parseApi(pathOrCallback).apiBase);
     }
 
+    pathOrCallback ??= (api: KubeApi) => true; // pick first if none given
     return Array.from(this.apis.values()).find(pathOrCallback);
   }
 
