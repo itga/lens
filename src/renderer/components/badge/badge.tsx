@@ -6,6 +6,7 @@ import { TooltipDecoratorProps, withTooltip } from "../tooltip";
 import { observer } from "mobx-react";
 import { autobind } from "../../utils";
 import { observable } from "mobx";
+import { Icon } from "../icon";
 
 interface Props extends React.HTMLAttributes<any>, TooltipDecoratorProps {
   small?: boolean;
@@ -15,23 +16,46 @@ interface Props extends React.HTMLAttributes<any>, TooltipDecoratorProps {
 @withTooltip
 @observer
 export class Badge extends React.Component<Props> {
+  private elem: HTMLElement;
+
   @observable isExpanded = false
+  @observable canBeExpanded = false
+
+  componentDidMount() {
+    this.canBeExpanded = this.elem.offsetWidth < this.elem.scrollWidth
+  }
 
   @autobind()
-  onDoubleClick() {
-    this.isExpanded = !this.isExpanded
-    window.getSelection()?.empty()
+  onClick() {
+    if (this.canBeExpanded) {
+      this.isExpanded = !this.isExpanded
+    }
+  }
+
+  renderExpansionIcon() {
+    if (!this.canBeExpanded) {
+      return null
+    }
+
+    if (this.isExpanded) {
+      return <Icon className="expansionIcon" size={20} material="close_fullscreen" onClick={this.onClick} />
+    }
+
+    return <Icon className="expansionIcon" size={20} material="open_in_full" onClick={this.onClick} />
   }
 
   render() {
     const { className, label, small, children, ...elemProps } = this.props;
-    const classNames = cssNames("Badge", { small }, className, { expanded: this.isExpanded })
+    const classNames = cssNames("Badge", className, { small, expanded: this.isExpanded })
 
     return (
-      <span className={classNames} {...elemProps} onDoubleClick={this.onDoubleClick}>
-        {label}
-        {children}
-      </span>
+      <div className={classNames} {...elemProps}>
+        {this.renderExpansionIcon()}
+        <div className="children" ref={ref => (this.elem = ref)}>
+          {label}
+          {children}
+        </div>
+      </div>
     )
   }
 }

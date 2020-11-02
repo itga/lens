@@ -6,9 +6,12 @@
   padding: .2em .4em;
   white-space: nowrap;
   max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-user-select: all;
+  position: relative;
+
+  >.children {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   &.small {
     font-size: $font-size-small;
@@ -18,5 +21,16 @@
     overflow: unset;
     text-overflow: unset;
     white-space: unset;
+  }
+
+  > .expansionIcon {
+    transform: scaleX(-1);
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    color: $textColorAccent;
+    background-color: $halfGray;
+    border-radius: 50%;
+    padding: 2px;
   }
 }

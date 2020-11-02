@@ -10,8 +10,6 @@ interface Props extends React.HTMLProps<any> {
 }
 
 export class Spinner extends React.Component<Props, {}> {
-  private elem: HTMLElement;
-
   static defaultProps = {
     singleColor: true,
     center: false,
@@ -21,6 +19,6 @@ export class Spinner extends React.Component<Props, {}> {
     const { center, singleColor, centerHorizontal, className, ...props } = this.props;
     const classNames = cssNames('Spinner', className, { singleColor, center, centerHorizontal });
 
-    return <div {...props} className={classNames} ref={e => this.elem = e} />;
+    return <div {...props} className={classNames} />;
   }
 }

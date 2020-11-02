@@ -18,12 +18,11 @@ export class DrawerItem extends React.Component<DrawerItemProps> {
 
     const classNames = cssNames("DrawerItem", className, { labelsOnly });
     const content = displayBooleans(renderBoolean, children)
-    console.log(renderBoolean, content)
 
     return (
       <div {...elemProps} className={classNames} title={title}>
         <span className="name">{name}</span>
-        <span className="value">{content}</span>
+        <div className="value">{content}</div>
       </div>
     )
   }
