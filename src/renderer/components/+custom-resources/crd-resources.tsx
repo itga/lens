@@ -58,10 +58,9 @@ export class CrdResources extends React.Component<Props> {
     extraColumns.forEach(column => {
       sortingCallbacks[column.name] = (item: KubeObject) => jsonPath.value(item, column.jsonPath.slice(1))
     })
-    // todo: merge extra columns and other params to predefined view
-    const { List = KubeObjectListLayout } = apiManager.getApi(crd.getResourceApiBase());
+
     return (
-      <List
+      <KubeObjectListLayout
         className="CrdResources"
         isClusterScoped={!isNamespaced}
         store={store}
