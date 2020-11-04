@@ -26,6 +26,7 @@
   > .expansionIcon {
     transform: scaleX(-1);
     position: absolute;
+    z-index: 1;
     right: -10px;
     bottom: -10px;
     color: $textColorAccent;
