@@ -252,7 +252,7 @@
     "win-ca": "^3.2.0",
     "winston": "^3.2.1",
     "winston-transport-browserconsole": "^1.0.5",
-    "ws": "^7.3.0"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
